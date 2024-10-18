@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Arrival Times</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .app-container {
+            background-color: #fff;
+            width: 768px; /* iPad size width */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .bus-info {
+            border-top: 1px solid #ccc;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bus-info:first-of-type {
+            border-top: none;
+        }
+        .bus-route {
+            font-size: 30px;
+            font-weight: bold;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+        }
+        .bus-icon {
+            margin-right: 20px;
+            font-size: 50px;
+        }
+        .bus-time-container {
+            display: flex;
+            align-items: center;
+        }
+        .bus-time {
+            font-size: 30px;
+            color: #555;
+            margin-right: 10px;
+        }
+        .icon {
+            font-size: 30px;
+        }
+        .sitting-icon {
+            color: orange;
+        }
+        .walking-icon {
+            color: #555;
+        }
+        .lying-icon {
+            color: blue;
+        }
+        .bus-destination {
+            font-size: 25px;
+            color: #888;
+        }
+        .refresh-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .refresh-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Blinking animation */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .blinking {
+            animation: blink 1s infinite;
+        }
+
+        /* Small style for the first bus-info */
+        .small {
+            font-size: 0.8em; /* Reduced size */
+            opacity: 0.7; /* Lightened */
+        }
+        .small .bus-icon {
+            font-size: 40px; /* Reduced icon size */
+        }
+
+        /* Small style for the first bus-info */
+        .big {
+            font-size: 0.8em; /* Reduced size */
+            opacity: 0.7; /* Lightened */
+        }
+        .big .bus-icon {
+            font-size: 80px; /* Reduced icon size */
+        }
+	
+	</style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">현대정형외과 정류장(여의도방향)</div>
+        <div class="bus-info small"> <!-- Added the small class here -->
+            <div class="bus-route" style="color:red;">
+                <i class="fas fa-bus bus-icon"></i>
+                88번
+            </div>
+            <div class="bus-time-container small">
+                <div class="bus-time" style="color:red;">5 min</div>
+                <div class="bus-time" style="color:red;">( 1 정거장전 )</div>
+                <i class="fas fa-person-seat icon sitting-icon"></i>
+            </div>
+            <div class="bus-destination">늦음</div>
+        </div>
+        <div class="bus-info blinking big">
+            <div class="bus-route" style="color:green;">
+                <i class="fas fa-bus bus-icon"></i>
+                83번
+            </div>
+            <div class="bus-time-container">
+                <div class="bus-time" style="color:green;">12 min</div>
+                <div class="bus-time" style="color:green;">( 3 정거장전 )</div>
+                <i class="fas fa-person-walking icon walking-icon"></i>
+            </div>
+            <div class="bus-destination">적당</div>
+        </div>
+        <div class="bus-info blinking big">
+            <div class="bus-route" style="color:green;">
+                <i class="fas fa-bus bus-icon"></i>
+                83번
+            </div>
+            <div class="bus-time-container">
+                <div class="bus-time" style="color:green;">12 min</div>
+                <div class="bus-time" style="color:green;">( 3 정거장전 )</div>
+                <i class="fas fa-person-walking icon walking-icon"></i>
+            </div>
+            <div class="bus-destination">적당</div>
+        </div>
+        <div class="bus-info">
+            <div class="bus-route">
+                <i class="fas fa-bus bus-icon"></i>
+                10번
+            </div>
+            <div class="bus-time-container">
+                <div class="bus-time" style="color:black;">20 min</div>
+                <div class="bus-time" style="color:black;">( 10 정거장전 )</div>
+                <i class="fas fa-bed icon lying-icon"></i>
+            </div>
+            <div class="bus-destination">여유</div>
+        </div>
+        <div class="bus-info">
+            <div class="bus-route">
+                <i class="fas fa-bus bus-icon"></i>
+                10번
+            </div>
+            <div class="bus-time-container">
+                <div class="bus-time" style="color:black;">20 min</div>
+                <div class="bus-time" style="color:black;">( 10 정거장전 )</div>
+                <i class="fas fa-bed icon lying-icon"></i>
+            </div>
+            <div class="bus-destination">여유</div>
+        </div>
+        <div class="bus-info">
+            <div class="bus-route">
+                <i class="fas fa-bus bus-icon"></i>
+                10번
+            </div>
+            <div class="bus-time-container">
+                <div class="bus-time" style="color:black;">20 min</div>
+                <div class="bus-time" style="color:black;">( 10 정거장전 )</div>
+                <i class="fas fa-bed icon lying-icon"></i>
+            </div>
+            <div class="bus-destination">여유</div>
+        </div>
+        <button class="refresh-button">Refresh</button>
+    </div>
+
+    <script>
+        document.querySelector('.refresh-button').addEventListener('click', function() {
+            alert('Refreshing bus arrival times...');
+        });
+    </script>
+</body>
+</html>
